@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
-const devMode = process.env.NODE_ENV === 'development';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
     mode: 'development',
-    watch: true,
+    watch: NODE_ENV === "development",
     entry: {
         app: './src/main.ts'
     },
@@ -56,11 +57,15 @@ module.exports = {
                API_URL: JSON.stringify('http://localhost:5000')
            }
         }),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),
+        new FilterWarningsPlugin({
+            exclude: /System.import/
+        })
     ],
 
     devServer: {
         historyApiFallback: true,
         stats: 'minimal'
-    }
+    },
+    devtool: NODE_ENV === "development" ? "cheap-inline-module-source-map" : false
 }
