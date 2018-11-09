@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 @Component({
     selector: 'app-root',
     template: `   
-        <H1>App started</H1>
+        <H1>App started  1{{ temp }}</H1>
   `,
 })
 
