@@ -1,11 +1,13 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+console.log("common", process.env.NODE_ENV);
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 module.exports = {
-    // mode: 'development',
-
     entry: {
-        app: './src/main.ts'
+        app: path.join(__dirname, './src/main.ts'),
     },
 
     resolve: {
@@ -42,8 +44,9 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin('dist', {} ),
         new HtmlWebpackPlugin(
-            { template: './src/index.html' }
+            { template: path.join(__dirname, './src/index.html') }
         )
     ]
 }

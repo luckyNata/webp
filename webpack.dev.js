@@ -2,14 +2,14 @@ const webpack = require('webpack');
 const commonConfig = require('./webpack.common');
 const webpackMerge = require('webpack-merge');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+console.log("@@@Dev@@@",  process.env.NODE_ENV);
 module.exports = webpackMerge(commonConfig, {
+    mode: process.env.NODE_ENV,
     devtool: 'cheap-inline-module-source-map',
-    watch: true,
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath: "/", // for assets
+        publicPath: "/",
         filename: "bundle.js"
     },
     devServer: {
@@ -19,7 +19,7 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                API_URL: JSON.stringify('http://localhost:5000')
+                API_URL: JSON.stringify('http://localhost:8000')
             }
         }),
         new webpack.NamedModulesPlugin()

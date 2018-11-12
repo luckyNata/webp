@@ -1,8 +1,8 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (NODE_ENV === 'development') {
-    module.exports = require('./config/webpack.dev');
+    module.exports = require('./webpack.dev');
 } else {
-    module.exports = require('./config/webpack.prod');
+    module.exports = require('./webpack.prod');
 }
 
